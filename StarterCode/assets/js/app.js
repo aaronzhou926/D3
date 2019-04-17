@@ -68,26 +68,27 @@ function makeResponsive() {
 
       // Step 5: Create Circles
       // ==============================
-      var circlesGroup = chartGroup.selectAll('circle')
-      .data(response)
+      var circlesGroup = chartGroup.selectAll('circle').data(response);
+
+      circlesGroup
       .enter()
       .append('circle')
       .attr('class','bubble')
       .attr('cx',d=>xLinearScale(d.poverty))
-      .attr('cy',d=>yLinearScale(d.healthcare))
+      .attr('cy',d=>yLinearScale(d.healthcare+0.2))
       .attr('r','10')
       .attr('opacity','.5')
       .classed('stateCircle',true);
 
-      chartGroup.selectAll('bubble')
-      .data(response)
+      circlesGroup
       .enter()
       .append('text')
+      .attr('x',d=>xLinearScale(d.poverty))
+      .attr('y',d=>yLinearScale(d.healthcare))
       .text(function(d){return d.abbr})
-      .attr('cx',d=>xLinearScale(d.poverty))
-      .attr('cy',d=>yLinearScale(d.healthcare))
       .attr('fill','white')
-      .attr('text-anchor','middle');
+      .classed('stateText',true);
+      //.attr('text-anchor','middle');
 
        // Create axes labels
       chartGroup.append("text")
